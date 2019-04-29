@@ -23,10 +23,12 @@ Therefore I developed this conversions tool that I use a lot at work. I use it i
 
 ## Usage
 
-The main method to use is `convertAll`.  
+The main method to use is `convertAll`:
 > Convert borders, fills and texts in an Excel range to shapes. Deletes existing shapes with the same name beforehand and selects the shapes after to copy them.
 
-Public methods (see docstrings in VBA code for more details):
+### Public methods
+
+The class has the following public methods (see docstrings in VBA code for more details):
 
 <dl>
   <dt><code>convertAll</code></dt>
