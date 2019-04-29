@@ -130,8 +130,8 @@ Public Sub deleteShapes(ByVal wks As Worksheet, Optional ByVal strNameOfShapes A
         Err.Raise vbObjectError + 513, "ConvertRangeToShapes.selectShapes", _
         "Please set a name for the shapes."
     Else
-        For Each shp In wks.shapes
-            If shp.Name Like strShapesName Then shp.Delete
+        For Each shp In wks.Shapes
+            If shp.Name Like strNameOfShapes Then shp.Delete
         Next
     End If
 End Sub
@@ -161,7 +161,7 @@ Public Sub selectShapes(ByVal wks As Worksheet, Optional ByVal strNameOfShapes A
         wks.Activate
         wks.Range("A1").Activate
         ActiveCell.Select
-        For Each shp In wks.shapes
+        For Each shp In wks.Shapes
             If shp.Name Like strNameOfShapes Then
                 shp.Select False
                 'False = extend instead of replace the current selection.
@@ -289,7 +289,7 @@ ByVal strNameForShapes As String)
                                         'success
                                         lngMaxVertiRow = rng2.Row
                                         With wks.Range(rgnStart, rng2)
-                                            Set shp = wks.shapes.AddShape(msoShapeRectangle, .Left, .Top, .Width, .Height)
+                                            Set shp = wks.Shapes.AddShape(msoShapeRectangle, .Left, .Top, .Width, .Height)
                                             shp.Fill.Visible = msoFalse
                                             shp.ZOrder msoSendToBack
                                             shp.Name = strNameForShapes
@@ -358,7 +358,7 @@ ByVal strNameForShapes As String)
                 Else
                     Set rngIgnoreLeft = Application.Union(rngIgnoreLeft, .Cells())
                 End If
-                Set shp = .Parent.shapes.AddConnector(msoConnectorStraight, .Left, .Top, .Left, .Top + .Height)
+                Set shp = .Parent.Shapes.AddConnector(msoConnectorStraight, .Left, .Top, .Left, .Top + .Height)
                     makeShapeLineMatchCellBorder shp, .Borders(xlEdgeLeft)
                     shp.ZOrder msoSendToBack
                     shp.Name = strNameForShapes
@@ -388,7 +388,7 @@ ByVal strNameForShapes As String)
                 Else
                     Set rngIgnoreTop = Application.Union(rngIgnoreTop, .Cells())
                 End If
-                Set shp = .Parent.shapes.AddConnector(msoConnectorStraight, .Left, .Top, .Left + .Width, .Top)
+                Set shp = .Parent.Shapes.AddConnector(msoConnectorStraight, .Left, .Top, .Left + .Width, .Top)
                     makeShapeLineMatchCellBorder shp, .Borders(xlEdgeTop)
                     shp.ZOrder msoSendToBack
                     shp.Name = strNameForShapes
@@ -497,7 +497,7 @@ Optional lngIgnoreFillColor As Long = -1, Optional ByVal strNameForShapes As Str
                     End If
                     'create shape if color is not ignored and it has a fill
                     If backgroundColor Then
-                        Set shp = rng.Parent.shapes.AddShape(msoShapeRectangle, .Left, .Top, .Width, .Height)
+                        Set shp = rng.Parent.Shapes.AddShape(msoShapeRectangle, .Left, .Top, .Width, .Height)
                         shp.Name = strNameForShapes
                         shp.Fill.ForeColor.RGB = lng_color
                         shp.Line.Visible = msoFalse
@@ -542,7 +542,7 @@ Public Sub convertTexts(ByVal rngToConvert As Range, Optional ByVal strNameForSh
                         '---------------------------------------------------------------------------------------------------
                         Set rngForText = rng
                         If rngForText.MergeCells Then Set rngForText = rngForText.MergeArea
-                        Set shp = rng.Parent.shapes.AddTextbox(msoTextOrientationHorizontal, rng.Left, rng.Top, _
+                        Set shp = rng.Parent.Shapes.AddTextbox(msoTextOrientationHorizontal, rng.Left, rng.Top, _
                         rngForText.Width, rngForText.Height)
                         
                         With shp
